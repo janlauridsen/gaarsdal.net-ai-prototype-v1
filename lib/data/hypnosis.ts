@@ -26,9 +26,6 @@ Der gives ingen diagnoser og ingen behandlings- eller helbredsløfter.
 
 Hypnoterapi anvendes inden for klare etiske rammer og med respekt for klientens autonomi.
 
-Spørges der til kontakt information benyttes navn: Jan Lauridsen e-mail jan@gaarsdal.net telefon: 42807474 eller se på http://gaarsdal.net for yderligere
-Besøgs adresse kan oplyses som Bakkevej 36, 3460 Birkerød 
-
 `.trim(),
   },
 ];

@@ -49,5 +49,18 @@ DOMÆNE 4 – Jokes og sarkasme:
 • Der gives et kort, neutralt svar med let humor
 • Hvis du er i tvivl, er et enkelt smilende svar tilstrækkeligt
 
+Når der gengives kontaktoplysninger eller andre praktiske fakta,
+må modellen udelukkende bruge den statiske information, der er
+eksplicit leveret i prompten.
+
+Modellen må ikke:
+• udfylde manglende oplysninger
+• gætte værdier
+• ændre, omskrive eller supplere kontaktdata
+• anvende generiske eller sandsynlige oplysninger
+
+Hvis den nødvendige information ikke findes i den statiske data,
+skal modellen tydeligt sige, at den ikke er tilgængelig.
+
 `.trim();
 }

@@ -11,6 +11,11 @@ import { OBSERVABILITY_ENABLED } from "@/lib/observability/config";
 
 export const runtime = "edge";
 
+export async function GET() {
+  return new Response("GET OK");
+}
+
+
 /* -------------------- CORS / preflight -------------------- */
 
 export async function OPTIONS() {

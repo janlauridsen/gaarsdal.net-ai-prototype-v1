@@ -1,148 +1,100 @@
-# gaarsdal.net-ai-prototype-v1
-State-of-the-art AI løsning - en prototype oplæg dokumenteret i projekt-brief.md 
+# AI Hypnoterapi Chatbot – Arkitektur- & Læringsprototype
 
-# AI Hypnoterapi Chatbot – Referenceprototype
+Dette repository indeholder en **lærings- og referenceprototype**
+for en moderne, domænebegrænset AI-chatbot.
 
-Dette projekt er en **lærings- og arkitekturprototype** for en moderne AI-chatbot med fokus på:
-- state-of-the-art arkitektur
-- minimal kompleksitet
-- stabilitet og gennemsigtighed
-- kontrolleret iteration
-
-Projektet er **ikke et færdigt produkt** og er **ikke tiltænkt produktion** i sin nuværende form.
+Projektets primære formål er **arkitekturforståelse** —
+ikke at levere et færdigt produkt.
 
 ---
 
-## Formål
+## Hvad er dette projekt?
 
-Formålet med projektet er at:
+- En lille, isoleret AI-chatbot med fokus på **hypnoterapi**
+- Bygget trin-for-trin med **bevidst lav kompleksitet**
+- Arkitekturen er:
+  - moderne
+  - cloud-baseret
+  - model-agnostisk
+- Alle beslutninger er dokumenteret og låst pr. iteration
 
-- forstå og afprøve moderne AI-arkitekturprincipper
-- bygge en lille, isoleret chatbot med klar faglig afgrænsning
-- kunne iterere i små, kontrollerede skridt
-- skabe et genbrugeligt arkitektonisk fundament til fremtidige kommercielle løsninger
-
-Chatbotten fungerer som en **hypnoterapeutisk chatbot**, men er udelukkende en teknisk prototype.
-
----
-
-## Faglig og etisk afgrænsning
-
-Chatbotten:
-
-- arbejder **udelukkende inden for hypnoterapi**
-- baserer al viden på **statisk, manuelt udvalgt indhold fra gaarsdal.net**
-- stiller **ingen diagnoser**
-- giver **ingen behandlings- eller helbredsløfter**
-- erstatter **ikke** lægelig, psykiatrisk eller psykologisk behandling
-
-Hvis chatbotten mangler viden, skal den sige det klart og ærligt.
+Projektet er velegnet som:
+- reference for AI-arkitektur
+- undervisningsmateriale
+- udgangspunkt for videre eksperimenter
 
 ---
 
-## Stack (låst)
+## Hvad er dette projekt *ikke*?
 
-Projektet anvender en fast, bevidst begrænset stack:
+- ❌ Et færdigt produkt
+- ❌ En produktionsklar løsning
+- ❌ Et generelt AI-chatinterface
+- ❌ En platform for mange domæner
+- ❌ Et optimeret eller skaleret system
 
-- **GitHub** – versionering
-- **Vercel** – hosting + Edge Functions
-- **Upstash (Redis)** – session-hukommelse (7 dage)
-- **Cloud-only arkitektur**
-
-Ingen nye services, tools eller platforme introduceres i denne fase.
-
----
-
-## Overordnet arkitektur
-
-Systemet består af få, klart adskilte dele:
-
-Client / UI
-↓
-Vercel Edge Function (/api/chat)
-↓
-Prompt-komposition
-↓
-AI-model-adapter
-↓
-Redis (session-hukommelse, 7 dage)
-
-Statisk hypnoterapi-data injiceres i prompten
-
-yaml
-Kopier kode
-
-Der anvendes:
-- ingen fine-tuning
-- ingen autonome agent-teams
-- ingen eval-pipeline
-- ingen embeddings i første iteration
+Mange ting er bevidst udeladt for at holde fokus.
 
 ---
 
-## Projektstruktur (forenklet)
+## Hvad kan man lære af repo’et?
 
-/api/chat/route.ts # Chat-endpoint (Edge Function)
-
-/lib
-/ai/adapter.ts # Model-agnostisk AI-interface
-/memory/redis.ts # Session & hukommelse
-/prompts # Prompt-moduler
-/data/hypnosis.ts # Statisk hypnoterapi-viden
-
-/docs
-PROJECT_BRIEF.md
-ARCHITECTURE.md
-
-yaml
-Kopier kode
-
-Strukturen afspejler arkitekturen 1:1.
+- Hvordan man designer en **minimal, moderne AI-arkitektur**
+- Hvordan man:
+  - afgrænser et domæne
+  - håndhæver etik og sikkerhed
+  - arbejder med session-baseret hukommelse
+- Hvordan man itererer **kontrolleret og dokumenteret**
+- Hvordan observability og eval kan introduceres uden kompleksitet
 
 ---
 
-## Lokal udvikling
+## Overordnet arkitektur (kort)
 
-1. Klon repoet
-2. Opret `.env.local` baseret på `.env.example`
-3. Tilføj:
-   - `OPENAI_API_KEY`
-   - `UPSTASH_REDIS_REST_URL`
-   - `UPSTASH_REDIS_REST_TOKEN`
-4. Kør projektet lokalt (Next.js / Vercel setup)
+Systemet består af få, klart adskilte komponenter:
 
----
+- Client / UI (bevidst “dum”)
+- Ét API-endpoint (`/api/chat`)
+- Prompt-komposition i lag
+- AI-model-adapter
+- Session-hukommelse i Redis
+- Statisk, versionsstyret domæneviden
 
-## Kendte begrænsninger (bevidste valg)
-
-- Simpel prompt (ingen token-optimering)
-- Hele datasættet injiceres i prompten
-- Ingen streaming
-- Ingen rate limiting
-- Ingen UI-polish
-- Ingen produktionssikkerhed
-
-Disse valg er **bevidste** og støtter projektets læringsformål.
+Detaljer findes i:
+- `ARCHITECTURE.md`
+- `DECISIONS.md`
 
 ---
 
-## Videre arbejde
+## Sådan læses repo’et
 
-Projektet er designet til kontrolleret videreudvikling, fx:
+Anbefalet læserækkefølge:
 
-- RAG-light uden ny stack
-- Forfinet prompt-adfærd
-- Forbedret session-hukommelse
-- Simpel UI
-- Klargøring til kommerciel version
+1. `PROJECT_BRIEF.md` – formål og rammer
+2. `ARCHITECTURE.md` – teknisk reference
+3. `DECISIONS.md` – hvorfor arkitekturen ser sådan ud
+4. `/docs/` – eval, observability og proces
+5. Koden – som implementering af ovenstående
 
-Kun ét skridt ad gangen.
+---
+
+## Iterationstænkning
+
+Projektet er bygget i **afsluttede iterationer**.
+Hver iteration:
+- har ét klart fokus
+- afsluttes eksplicit
+- danner stabil baseline for næste trin
+
+Dette gør repo’et egnet som reference over tid.
 
 ---
 
 ## Status
 
-✅ Færdig referenceprototype  
-🧠 Fokus: arkitektur, forståelse og læring  
-🚫 Ikke produktion
+Projektet er i **konsolideringsfase**  
+og fungerer som stabil referenceprototype.
 
+Videreudvikling bør ske:
+- i nye iterationer
+- eller i et nyt repo, der bygger videre herfra

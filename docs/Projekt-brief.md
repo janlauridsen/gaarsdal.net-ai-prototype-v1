@@ -218,3 +218,26 @@ Der anvendes:
 - ingen automatisering
 
 Formålet er læring og arkitektonisk klarhed, ikke optimal retrieval.
+
+---
+
+## Iteration 4 – Status (RAG-light)
+
+Iteration 4 har introduceret selektiv brug af statisk domæneviden
+(RAG-light) uden ændringer i arkitektur eller stack.
+
+Tilføjelser i denne iteration:
+- Domæneviden opdelt i strukturerede, taggede sektioner
+- Simpel, deterministisk udvælgelse baseret på brugerinput
+- Prompt-injektion af kun relevant domæneviden
+- Fuldt integreret i eksisterende chat-flow
+
+Følgende er fortsat bevidst udeladt:
+- embeddings og vector search
+- eksterne datakilder
+- automatiseret vidensudvidelse
+- ranking eller scoring af viden
+- fallback-logik ved manglende match
+
+Iteration 4 afsluttes som stabil RAG-light baseline.
+Videreudvikling kræver eksplicit beslutning og ny iteration.

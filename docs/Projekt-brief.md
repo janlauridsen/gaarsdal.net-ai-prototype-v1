@@ -254,3 +254,24 @@ Systemet udvides med:
 - standardiserede afvisningssvar
 
 Der introduceres ingen nye modes, services eller arkitekturændringer.
+
+---
+
+## Iteration 5 – Status (Sikkerhed & grænsehåndhævelse)
+
+Iteration 5 har introduceret håndhævelse af etiske og faglige grænser i runtime.
+
+Tilføjelser i denne iteration:
+- Deterministiske sikkerhedschecks før AI-kald
+- Standardiserede afvisningssvar ved diagnose, behandling og medicinsk rådgivning
+- Forbedret forudsigelighed og ansvarlighed
+
+Følgende er fortsat bevidst udeladt:
+- Soft warnings eller logs
+- Prioritering af violations
+- UI-visning af afvisningstekster
+- Ændringer i backend-arkitektur eller prompt-struktur
+
+Iteration 5 afsluttes som stabil baseline for sikkerhed.
+Videreudvikling kræver eksplicit beslutning og ny iteration.
+

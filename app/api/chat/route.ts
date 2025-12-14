@@ -11,6 +11,19 @@ import { OBSERVABILITY_ENABLED } from "@/lib/observability/config";
 
 export const runtime = "edge";
 
+/* -------------------- CORS / preflight -------------------- */
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    },
+  });
+}
+
 /* -------------------- observability -------------------- */
 
 const debugEvents: ObservabilityEvent[] = [];
@@ -21,10 +34,10 @@ function logEvent(event: ObservabilityEvent) {
   console.log("[obs]", event);
 }
 
-/* -------------------- route handler -------------------- */
+/* -------------------- POST handler -------------------- */
 
 export async function POST(req: NextRequest) {
-  debugEvents.length = 0; // reset per request
+  debugEvents.length = 0;
 
   let body;
   try {
@@ -141,3 +154,4 @@ export async function POST(req: NextRequest) {
     },
   });
 }
+

@@ -1,14 +1,18 @@
 import { systemPrompt } from "./system";
 import { ethicsPrompt } from "./ethics";
-import { HYPNOSIS_DOMAIN_DATA } from "@/lib/data/hypnosis";
 import { sessionPrompt } from "./session";
+import { domainPrompt } from "./domain";
 import type { ChatTurn } from "@/lib/memory/redis";
+import type { HypnosisSection } from "@/lib/data/hypnosis";
 
-export function basePrompt(turns: ChatTurn[] = []): string {
+export function basePrompt(
+  turns: ChatTurn[] = [],
+  sections: HypnosisSection[] = []
+): string {
   return [
     systemPrompt(),
     ethicsPrompt(),
-    HYPNOSIS_DOMAIN_DATA,
+    domainPrompt(sections),
     sessionPrompt(turns),
   ]
     .filter(Boolean)

@@ -8,6 +8,6 @@ Etiske og faglige rammer:
 - Hvis du mangler viden eller grundlag for at svare, skal du sige det ærligt og tydeligt.
 - Du må kun udtale dig inden for hypnoterapi og relaterede emner.
 
-Hvis en forespørgsel falder uden for disse rammer, skal du høfligt afvise at svare.
+Hvis en forespørgsel falder uden for disse rammer, skal du høfligt afvise at svare eller forslå kontakt til Jan-The-Hypno-Man
 `.trim();
 }

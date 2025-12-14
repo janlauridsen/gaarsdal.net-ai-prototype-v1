@@ -277,15 +277,26 @@ Videreudvikling kræver eksplicit beslutning og ny iteration.
 
 ---
 
-## Iteration 6 – Fokus (Observability)
+## Iteration 6 – Status (Observability)
 
-Iteration 6 fokuserer på lærings-orienteret observability.
+Iteration 6 har introduceret lærings-orienteret observability
+uden ændringer i systemets adfærd eller arkitektur.
 
-Systemet udvides med:
-- simple runtime-events
-- metadata-baseret logging
-- mulighed for at slå observability til/fra
+Tilføjelser i denne iteration:
+- Formelle observability-event-typer
+- Runtime-logging via console (edge-safe)
+- Metadata-baseret indsigt i:
+  - session-dynamik
+  - RAG-light udvælgelse
+  - sikkerhedsafvisninger
+  - besked- og svarlængder
+- Centralt debug-flag til aktivering/deaktivering
 
-Der introduceres ingen eksterne services,
-og systemets adfærd ændres ikke.
+Følgende er fortsat bevidst udeladt:
+- persistent logging
+- eksterne analytics-services
+- visning i UI
+- performance- eller driftsovervågning
 
+Iteration 6 afsluttes som stabil baseline for lærings-observability.
+Videreudvikling kræver eksplicit beslutning og ny iteration.

@@ -164,3 +164,20 @@ Følgende er fortsat bevidst udeladt:
 Systemet er nu funktionelt som lærings- og referenceprototype.
 
 Videreudvikling kræver eksplicit beslutning og ny iteration.
+---
+
+## Iteration 3 – Fokus (Spor C: UI)
+
+Iteration 3 fokuserer på forbedring af test-UI med henblik på:
+
+- bedre synlighed af samtaleforløb
+- lettere manuel afprøvning
+- tydelig session-håndtering
+
+Iteration 3 introducerer ingen ændringer i:
+- arkitektur
+- backend-logik
+- AI-adfærd
+- datagrundlag
+
+UI’en forbliver teknisk og bevidst simpel.

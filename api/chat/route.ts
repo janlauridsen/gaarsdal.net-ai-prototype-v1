@@ -8,7 +8,7 @@ export const runtime = "edge";
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const { sessionId, message } = body;
-
+api/chat/route.ts
   if (!sessionId || !message) {
     return NextResponse.json(
       { error: "Missing sessionId or message" },

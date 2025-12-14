@@ -8,10 +8,16 @@ type ChatMessage = {
 };
 
 export default function Home() {
-  const [sessionId] = useState(() => crypto.randomUUID());
+  const [sessionId, setSessionId] = useState(() => crypto.randomUUID());
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [loading, setLoading] = useState(false);
+
+  function resetSession() {
+    setSessionId(crypto.randomUUID());
+    setMessages([]);
+    setMessage("");
+  }
 
   async function sendMessage() {
     if (!message) return;
@@ -50,6 +56,14 @@ export default function Home() {
   return (
     <main style={{ padding: 24, maxWidth: 600 }}>
       <h1>AI Hypnoterapi – Test UI</h1>
+
+      <div style={{ marginBottom: 12 }}>
+        <strong>Session ID:</strong>
+        <div style={{ fontSize: 12, wordBreak: "break-all" }}>{sessionId}</div>
+        <button onClick={resetSession} style={{ marginTop: 8 }}>
+          Reset session
+        </button>
+      </div>
 
       <div style={{ marginBottom: 24 }}>
         {messages.map((msg, index) => (

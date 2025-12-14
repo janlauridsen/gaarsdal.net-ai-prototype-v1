@@ -4,6 +4,7 @@ import { sessionPrompt } from "./session";
 import { domainPrompt } from "./domain";
 import type { ChatTurn } from "@/lib/memory/redis";
 import type { HypnosisSection } from "@/lib/data/hypnosis";
+import { CONTACT_INFO } from "@/lib/data/contact";
 
 export function basePrompt(
   turns: ChatTurn[] = [],

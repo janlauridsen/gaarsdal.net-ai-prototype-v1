@@ -85,6 +85,16 @@ export default function Home() {
       <button onClick={sendMessage} disabled={loading}>
         {loading ? "Sender..." : "Send"}
       </button>
+
+      {/* --- Debug panel --- */}
+      <hr style={{ margin: "32px 0" }} />
+
+      <section>
+        <h2>Debug</h2>
+        <p style={{ fontSize: 14, opacity: 0.7 }}>
+          No debug data yet.
+        </p>
+      </section>
     </main>
   );
 }

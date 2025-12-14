@@ -12,6 +12,7 @@ export function basePrompt(
 ): string {
   return [
     systemPrompt(),
+    CONTACT_INFO,
     ethicsPrompt(),
     domainPrompt(sections),
     sessionPrompt(turns),

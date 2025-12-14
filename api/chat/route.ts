@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession, appendToSession } from "@/lib/memory/redis";
+import { basePrompt } from "@/lib/prompts";
+import { generateText } from "@/lib/ai/adapter";
 
 export const runtime = "edge";
 
@@ -14,8 +16,8 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // 1. Hent eksisterende session (bruges ikke endnu, men bevidst læst)
-  await getSession(sessionId);
+  // 1. Hent session
+  const session = await getSession(sessionId);
 
   // 2. Gem brugerens besked
   await appendToSession(sessionId, {
@@ -24,18 +26,24 @@ export async function POST(req: NextRequest) {
     timestamp: Date.now(),
   });
 
-  // 3. Midlertidigt statisk svar (placeholder)
-  const reply = "Tak for din besked.";
+  // 3. Sammensæt prompt (inkl. session-kontekst)
+  const prompt = [
+    basePrompt(session),
+    `Brugerens besked:\n${message}`,
+  ].join("\n\n");
 
-  // 4. Gem assistant-svar
+  // 4. Kald AI-model via adapter
+  const result = await generateText({ prompt });
+
+  // 5. Gem assistant-svar
   await appendToSession(sessionId, {
     role: "assistant",
-    content: reply,
+    content: result.text,
     timestamp: Date.now(),
   });
 
-  // 5. Returner svar
+  // 6. Returner svar
   return NextResponse.json({
-    reply,
+    reply: result.text,
   });
 }

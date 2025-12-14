@@ -347,15 +347,28 @@ Videreudvikling kræver eksplicit beslutning og ny iteration.
 
 ---
 
-## Iteration 9 – Fokus (Konsolidering & undervisningsmateriale)
+## Iteration 9 – Status (Konsolidering & undervisningsmateriale)
 
-Iteration 9 fokuserer på konsolidering af projektet som
-et klart reference- og undervisningsmateriale.
+Iteration 9 har konsolideret projektet som et
+selvforklarende reference- og undervisningsrepo.
 
-Fokus er på:
-- forklaring af arkitektur og dataflow
-- dokumentation af iterationstænkning
-- tydeliggørelse af designbeslutninger
+Tilføjelser i denne iteration:
+- Overordnet README med formål og forventningsafstemning
+- Arkitektur-walkthrough målrettet undervisning
+- Iterations-overblik med læringsperspektiv
+- Samlet narrativ på tværs af arkitektur, kode og proces
 
-Der introduceres ingen nye features,
-og systemets runtime-adfærd ændres ikke.
+Følgende er bevidst udeladt:
+- Yderligere tekniske udvidelser
+- Arkitekturændringer
+- Nye features eller eksperimenter
+
+Projektet betragtes herefter som:
+- konsolideret
+- stabil reference
+- egnet til undervisning og vidensdeling
+
+Videreudvikling bør ske i:
+- nye iterationer med klart formål
+- eller i et nyt repository, der bygger videre herpå.
+

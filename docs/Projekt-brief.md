@@ -323,3 +323,25 @@ Følgende er bevidst udeladt:
 Iteration 7 afsluttes som stabil baseline for eval og kvalitetsforståelse.
 Videreudvikling kræver eksplicit beslutning og ny iteration.
 
+---
+
+## Iteration 8 – Status (UI debug & insight)
+
+Iteration 8 har udvidet test-UI’et med read-only debug-information
+for bedre indsigt i systemets runtime-adfærd.
+
+Tilføjelser i denne iteration:
+- Debug-panel i UI
+- Visning af valgte RAG-sektioner (metadata)
+- Visning af safety-status pr. request
+- Visning af observability-events (metadata)
+
+Følgende er bevidst udeladt:
+- UI-polish og styling
+- Redigering eller påvirkning af runtime-adfærd
+- Persistens af debug-data
+- Produktionsklar debug
+
+Iteration 8 afsluttes som stabil baseline for UI-baseret indsigt.
+Videreudvikling kræver eksplicit beslutning og ny iteration.
+

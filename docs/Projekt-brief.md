@@ -241,3 +241,16 @@ Følgende er fortsat bevidst udeladt:
 
 Iteration 4 afsluttes som stabil RAG-light baseline.
 Videreudvikling kræver eksplicit beslutning og ny iteration.
+
+---
+
+## Iteration 5 – Fokus (Sikkerhed & grænsehåndhævelse)
+
+Iteration 5 fokuserer på håndhævelse af etiske og faglige grænser
+i runtime-logik.
+
+Systemet udvides med:
+- deterministiske sikkerhedschecks
+- standardiserede afvisningssvar
+
+Der introduceres ingen nye modes, services eller arkitekturændringer.

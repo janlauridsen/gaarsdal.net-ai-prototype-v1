@@ -181,3 +181,24 @@ Iteration 3 introducerer ingen ændringer i:
 - datagrundlag
 
 UI’en forbliver teknisk og bevidst simpel.
+---
+
+## Iteration 3 – Status (Spor C: UI)
+
+Iteration 3 har forbedret den tekniske test-UI uden ændringer i
+arkitektur, backend eller AI-adfærd.
+
+Tilføjelser i denne iteration:
+- Visning af komplet chat-historik i UI
+- Synligt session-id
+- Kontrolleret nulstilling af session
+- Forbedret manuel testbarhed og gennemsigtighed
+
+Følgende er fortsat bevidst udeladt:
+- UI-polish og design
+- persistens i klienten
+- backend-ændringer
+- nye features eller modes
+
+Iteration 3 afsluttes som stabil baseline.
+Videreudvikling kræver eksplicit beslutning og ny iteration.

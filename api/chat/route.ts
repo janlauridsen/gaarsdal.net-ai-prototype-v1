@@ -11,12 +11,17 @@ import { OBSERVABILITY_ENABLED } from "@/lib/observability/config";
 
 export const runtime = "edge";
 
+const debugEvents: ObservabilityEvent[] = [];
+
 function logEvent(event: ObservabilityEvent) {
   if (!OBSERVABILITY_ENABLED) return;
+  debugEvents.push(event);
   console.log("[obs]", event);
 }
 
 export async function POST(req: NextRequest) {
+  debugEvents.length = 0; // reset per request
+
   const body = await req.json();
   const { sessionId, message } = body;
 
@@ -29,7 +34,6 @@ export async function POST(req: NextRequest) {
 
   logEvent({ type: "session_start", sessionId });
 
-  // 1. Gem brugerens besked
   await appendToSession(sessionId, {
     role: "user",
     content: message,
@@ -42,7 +46,6 @@ export async function POST(req: NextRequest) {
     messageLength: message.length,
   });
 
-  // 2. Sikkerhedscheck
   const violation = checkSafetyViolation(message);
 
   if (violation) {
@@ -66,13 +69,17 @@ export async function POST(req: NextRequest) {
       responseLength: reply.length,
     });
 
-    return NextResponse.json({ reply });
+    return NextResponse.json({
+      reply,
+      debug: {
+        safetyViolation: violation,
+        events: debugEvents,
+      },
+    });
   }
 
-  // 3. Hent session
   const session = await getSession(sessionId);
 
-  // 4. RAG-light udvælgelse
   const selectedSections = selectHypnosisSections(
     HYPNOSIS_SECTIONS,
     message
@@ -84,13 +91,11 @@ export async function POST(req: NextRequest) {
     sectionIds: selectedSections.map((s) => s.id),
   });
 
-  // 5. Prompt
   const prompt = [
     basePrompt(session, selectedSections),
     `Brugerens besked:\n${message}`,
   ].join("\n\n");
 
-  // 6. AI-kald
   const result = await generateText({ prompt });
 
   await appendToSession(sessionId, {
@@ -105,8 +110,11 @@ export async function POST(req: NextRequest) {
     responseLength: result.text.length,
   });
 
-  // 7. Returner svar
   return NextResponse.json({
     reply: result.text,
+    debug: {
+      ragSectionIds: selectedSections.map((s) => s.id),
+      events: debugEvents,
+    },
   });
 }

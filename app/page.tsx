@@ -8,7 +8,13 @@ type ChatMessage = {
 };
 
 export default function Home() {
-  const [sessionId, setSessionId] = useState(() => crypto.randomUUID());
+  // Session id – generated ONLY after mount (avoids hydration mismatch)
+  const [sessionId, setSessionId] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSessionId(crypto.randomUUID());
+  }, []);
+
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [loading, setLoading] = useState(false);
@@ -28,7 +34,7 @@ export default function Home() {
   }
 
   async function sendMessage() {
-    if (!message) return;
+    if (!message || !sessionId) return;
 
     const userMessage: ChatMessage = {
       role: "user",
@@ -73,6 +79,11 @@ export default function Home() {
     setLoading(false);
   }
 
+  // Guard: render nothing until sessionId exists (prevents hydration mismatch)
+  if (!sessionId) {
+    return null;
+  }
+
   return (
     <main style={{ padding: 24, maxWidth: 640 }}>
       <h1>AI Hypnoterapi – Test UI</h1>
@@ -80,7 +91,9 @@ export default function Home() {
       {/* Session info */}
       <div style={{ marginBottom: 16 }}>
         <strong>Session ID:</strong>
-        <div style={{ fontSize: 12, wordBreak: "break-all" }}>{sessionId}</div>
+        <div style={{ fontSize: 12, wordBreak: "break-all" }}>
+          {sessionId}
+        </div>
         <button onClick={resetSession} style={{ marginTop: 8 }}>
           Reset session
         </button>

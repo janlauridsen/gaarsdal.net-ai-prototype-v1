@@ -7,10 +7,12 @@ import { selectHypnosisSections } from "@/lib/data/selectHypnosisSections";
 import { checkSafetyViolation } from "@/lib/safety/rules";
 import { SAFETY_RESPONSES } from "@/lib/safety/responses";
 import type { ObservabilityEvent } from "@/lib/observability/events";
+import { OBSERVABILITY_ENABLED } from "@/lib/observability/config";
 
 export const runtime = "edge";
 
 function logEvent(event: ObservabilityEvent) {
+  if (!OBSERVABILITY_ENABLED) return;
   console.log("[obs]", event);
 }
 

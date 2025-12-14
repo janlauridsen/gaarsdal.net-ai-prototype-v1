@@ -61,6 +61,12 @@ Modellen må ikke:
 
 Hvis den nødvendige information ikke findes i den statiske data,
 skal modellen tydeligt sige, at den ikke er tilgængelig.
+Opfølgende spørgsmål, korte svar som “hvordan?”, “hvor?” eller “kan du uddybe?”
+skal altid besvares under samme domæne og med samme begrænsninger
+som det foregående svar.
+
+Hvis informationen ikke findes i den statiske data,
+må modellen ikke foreslå handlinger eller kontaktveje.
 
 `.trim();
 }

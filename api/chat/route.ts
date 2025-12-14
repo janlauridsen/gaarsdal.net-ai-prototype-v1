@@ -11,6 +11,8 @@ import { OBSERVABILITY_ENABLED } from "@/lib/observability/config";
 
 export const runtime = "edge";
 
+/* -------------------- observability -------------------- */
+
 const debugEvents: ObservabilityEvent[] = [];
 
 function logEvent(event: ObservabilityEvent) {
@@ -19,10 +21,21 @@ function logEvent(event: ObservabilityEvent) {
   console.log("[obs]", event);
 }
 
+/* -------------------- route handler -------------------- */
+
 export async function POST(req: NextRequest) {
   debugEvents.length = 0; // reset per request
 
-  const body = await req.json();
+  let body;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json(
+      { error: "Invalid JSON body" },
+      { status: 400 }
+    );
+  }
+
   const { sessionId, message } = body;
 
   if (!sessionId || !message) {
@@ -33,6 +46,8 @@ export async function POST(req: NextRequest) {
   }
 
   logEvent({ type: "session_start", sessionId });
+
+  /* ---------- persist user message ---------- */
 
   await appendToSession(sessionId, {
     role: "user",
@@ -45,6 +60,8 @@ export async function POST(req: NextRequest) {
     sessionId,
     messageLength: message.length,
   });
+
+  /* ---------- safety ---------- */
 
   const violation = checkSafetyViolation(message);
 
@@ -78,6 +95,8 @@ export async function POST(req: NextRequest) {
     });
   }
 
+  /* ---------- session + RAG ---------- */
+
   const session = await getSession(sessionId);
 
   const selectedSections = selectHypnosisSections(
@@ -91,10 +110,14 @@ export async function POST(req: NextRequest) {
     sectionIds: selectedSections.map((s) => s.id),
   });
 
+  /* ---------- prompt ---------- */
+
   const prompt = [
     basePrompt(session, selectedSections),
     `Brugerens besked:\n${message}`,
   ].join("\n\n");
+
+  /* ---------- AI ---------- */
 
   const result = await generateText({ prompt });
 

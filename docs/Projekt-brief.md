@@ -275,3 +275,17 @@ Følgende er fortsat bevidst udeladt:
 Iteration 5 afsluttes som stabil baseline for sikkerhed.
 Videreudvikling kræver eksplicit beslutning og ny iteration.
 
+---
+
+## Iteration 6 – Fokus (Observability)
+
+Iteration 6 fokuserer på lærings-orienteret observability.
+
+Systemet udvides med:
+- simple runtime-events
+- metadata-baseret logging
+- mulighed for at slå observability til/fra
+
+Der introduceres ingen eksterne services,
+og systemets adfærd ændres ikke.
+

@@ -300,3 +300,26 @@ Følgende er fortsat bevidst udeladt:
 
 Iteration 6 afsluttes som stabil baseline for lærings-observability.
 Videreudvikling kræver eksplicit beslutning og ny iteration.
+
+---
+
+## Iteration 7 – Status (Eval & kvalitetsmåling)
+
+Iteration 7 har introduceret en struktureret tilgang til
+manuel og reproducerbar evaluering af chatbot-svar.
+
+Tilføjelser i denne iteration:
+- Klart definerede eval-kriterier
+- Fast sæt eval-spørgsmål (“golden questions”)
+- Beskrevet eval-proces og dokumentationsskabelon
+- Mulighed for kvalitativ sammenligning på tværs af iterationer
+
+Følgende er bevidst udeladt:
+- Automatisk eval-pipeline
+- Numerisk scoring
+- Feedback-loop til runtime
+- UI-integration
+
+Iteration 7 afsluttes som stabil baseline for eval og kvalitetsforståelse.
+Videreudvikling kræver eksplicit beslutning og ny iteration.
+

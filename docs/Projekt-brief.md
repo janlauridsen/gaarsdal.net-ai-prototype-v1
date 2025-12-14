@@ -164,6 +164,7 @@ Følgende er fortsat bevidst udeladt:
 Systemet er nu funktionelt som lærings- og referenceprototype.
 
 Videreudvikling kræver eksplicit beslutning og ny iteration.
+
 ---
 
 ## Iteration 3 – Fokus (Spor C: UI)
@@ -181,6 +182,7 @@ Iteration 3 introducerer ingen ændringer i:
 - datagrundlag
 
 UI’en forbliver teknisk og bevidst simpel.
+
 ---
 
 ## Iteration 3 – Status (Spor C: UI)
@@ -202,3 +204,17 @@ Følgende er fortsat bevidst udeladt:
 
 Iteration 3 afsluttes som stabil baseline.
 Videreudvikling kræver eksplicit beslutning og ny iteration.
+
+---
+
+## Iteration 4 – Fokus (RAG-light)
+
+Iteration 4 introducerer selektiv brug af statisk domæneviden
+baseret på brugerens forespørgsel.
+
+Der anvendes:
+- ingen embeddings
+- ingen eksterne datakilder
+- ingen automatisering
+
+Formålet er læring og arkitektonisk klarhed, ikke optimal retrieval.

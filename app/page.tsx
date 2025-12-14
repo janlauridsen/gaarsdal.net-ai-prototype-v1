@@ -13,10 +13,14 @@ export default function Home() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [loading, setLoading] = useState(false);
 
+  // Debug state
+  const [ragSectionIds, setRagSectionIds] = useState<string[]>([]);
+
   function resetSession() {
     setSessionId(crypto.randomUUID());
     setMessages([]);
     setMessage("");
+    setRagSectionIds([]);
   }
 
   async function sendMessage() {
@@ -50,6 +54,14 @@ export default function Home() {
     };
 
     setMessages((prev) => [...prev, assistantMessage]);
+
+    // Debug: RAG section ids (optional field)
+    if (Array.isArray(data.debug?.ragSectionIds)) {
+      setRagSectionIds(data.debug.ragSectionIds);
+    } else {
+      setRagSectionIds([]);
+    }
+
     setLoading(false);
   }
 
@@ -91,9 +103,19 @@ export default function Home() {
 
       <section>
         <h2>Debug</h2>
-        <p style={{ fontSize: 14, opacity: 0.7 }}>
-          No debug data yet.
-        </p>
+
+        <div style={{ fontSize: 14 }}>
+          <strong>RAG sections (ids):</strong>
+          {ragSectionIds.length === 0 ? (
+            <div style={{ opacity: 0.6 }}>None</div>
+          ) : (
+            <ul>
+              {ragSectionIds.map((id) => (
+                <li key={id}>{id}</li>
+              ))}
+            </ul>
+          )}
+        </div>
       </section>
     </main>
   );

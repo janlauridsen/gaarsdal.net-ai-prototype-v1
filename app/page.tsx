@@ -15,12 +15,16 @@ export default function Home() {
 
   // Debug state
   const [ragSectionIds, setRagSectionIds] = useState<string[]>([]);
+  const [safetyViolation, setSafetyViolation] = useState<string | null>(null);
+  const [events, setEvents] = useState<{ type: string }[]>([]);
 
   function resetSession() {
     setSessionId(crypto.randomUUID());
     setMessages([]);
     setMessage("");
     setRagSectionIds([]);
+    setSafetyViolation(null);
+    setEvents([]);
   }
 
   async function sendMessage() {
@@ -55,21 +59,26 @@ export default function Home() {
 
     setMessages((prev) => [...prev, assistantMessage]);
 
-    // Debug: RAG section ids (optional field)
-    if (Array.isArray(data.debug?.ragSectionIds)) {
-      setRagSectionIds(data.debug.ragSectionIds);
+    // Debug metadata (optional)
+    if (data.debug) {
+      setRagSectionIds(data.debug.ragSectionIds ?? []);
+      setSafetyViolation(data.debug.safetyViolation ?? null);
+      setEvents(data.debug.events ?? []);
     } else {
       setRagSectionIds([]);
+      setSafetyViolation(null);
+      setEvents([]);
     }
 
     setLoading(false);
   }
 
   return (
-    <main style={{ padding: 24, maxWidth: 600 }}>
+    <main style={{ padding: 24, maxWidth: 640 }}>
       <h1>AI Hypnoterapi – Test UI</h1>
 
-      <div style={{ marginBottom: 12 }}>
+      {/* Session info */}
+      <div style={{ marginBottom: 16 }}>
         <strong>Session ID:</strong>
         <div style={{ fontSize: 12, wordBreak: "break-all" }}>{sessionId}</div>
         <button onClick={resetSession} style={{ marginTop: 8 }}>
@@ -77,6 +86,7 @@ export default function Home() {
         </button>
       </div>
 
+      {/* Chat history */}
       <div style={{ marginBottom: 24 }}>
         {messages.map((msg, index) => (
           <p key={index}>
@@ -86,6 +96,7 @@ export default function Home() {
         ))}
       </div>
 
+      {/* Input */}
       <textarea
         rows={4}
         style={{ width: "100%", marginBottom: 12 }}
@@ -98,13 +109,22 @@ export default function Home() {
         {loading ? "Sender..." : "Send"}
       </button>
 
-      {/* --- Debug panel --- */}
+      {/* Debug panel */}
       <hr style={{ margin: "32px 0" }} />
 
       <section>
         <h2>Debug</h2>
 
-        <div style={{ fontSize: 14 }}>
+        <div style={{ fontSize: 14, marginBottom: 12 }}>
+          <strong>Safety:</strong>{" "}
+          {safetyViolation ? (
+            <span style={{ color: "red" }}>{safetyViolation}</span>
+          ) : (
+            <span style={{ opacity: 0.6 }}>None</span>
+          )}
+        </div>
+
+        <div style={{ fontSize: 14, marginBottom: 12 }}>
           <strong>RAG sections (ids):</strong>
           {ragSectionIds.length === 0 ? (
             <div style={{ opacity: 0.6 }}>None</div>
@@ -112,6 +132,19 @@ export default function Home() {
             <ul>
               {ragSectionIds.map((id) => (
                 <li key={id}>{id}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div style={{ fontSize: 14 }}>
+          <strong>Observability events:</strong>
+          {events.length === 0 ? (
+            <div style={{ opacity: 0.6 }}>None</div>
+          ) : (
+            <ul>
+              {events.map((e, i) => (
+                <li key={i}>{e.type}</li>
               ))}
             </ul>
           )}

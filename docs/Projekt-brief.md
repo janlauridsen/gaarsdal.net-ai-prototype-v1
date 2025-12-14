@@ -139,3 +139,28 @@ Første iteration er afsluttet med følgende egenskaber:
 Systemet er arkitektonisk komplet for lærings- og referenceformål.
 
 Videreudvikling kræver eksplicit beslutning og ny iteration.
+---
+
+## Iteration 2 – Status
+
+Iteration 2 har udvidet prototypen med følgende, uden arkitekturændringer:
+
+- Rigtig AI-model via adapter (OpenAI Chat Completions)
+- Bevarelse af model-agnostisk arkitektur
+- End-to-end chatflow:
+  - client → api/chat
+  - session-hukommelse (Redis)
+  - prompt-komposition
+  - AI-svar
+- Minimal test-UI til manuel afprøvning
+
+Følgende er fortsat bevidst udeladt:
+- streaming
+- RAG / embeddings
+- evaluering
+- sikkerhedslag
+- produktionsklarhed
+
+Systemet er nu funktionelt som lærings- og referenceprototype.
+
+Videreudvikling kræver eksplicit beslutning og ny iteration.

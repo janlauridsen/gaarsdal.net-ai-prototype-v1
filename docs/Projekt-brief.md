@@ -345,3 +345,17 @@ Følgende er bevidst udeladt:
 Iteration 8 afsluttes som stabil baseline for UI-baseret indsigt.
 Videreudvikling kræver eksplicit beslutning og ny iteration.
 
+---
+
+## Iteration 9 – Fokus (Konsolidering & undervisningsmateriale)
+
+Iteration 9 fokuserer på konsolidering af projektet som
+et klart reference- og undervisningsmateriale.
+
+Fokus er på:
+- forklaring af arkitektur og dataflow
+- dokumentation af iterationstænkning
+- tydeliggørelse af designbeslutninger
+
+Der introduceres ingen nye features,
+og systemets runtime-adfærd ændres ikke.

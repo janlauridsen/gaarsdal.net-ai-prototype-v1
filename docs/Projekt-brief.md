@@ -120,3 +120,22 @@ Dette dokument fungerer som:
 
 Ændringer kræver eksplicit beslutning.
 
+---
+
+## Iteration 1 – Status
+
+Første iteration er afsluttet med følgende egenskaber:
+
+- Én chat-endpoint (`/api/chat`)
+- Session-baseret hukommelse i Redis (TTL 7 dage)
+- Klar og isoleret prompt-komposition:
+  - systemrolle
+  - etik & sikkerhed
+  - statisk domæneviden
+  - session-kontekst
+- Model-agnostisk AI-adapter
+- Ingen streaming, ingen RAG, ingen produktsikkerhed
+
+Systemet er arkitektonisk komplet for lærings- og referenceformål.
+
+Videreudvikling kræver eksplicit beslutning og ny iteration.

@@ -6,8 +6,13 @@ import { HYPNOSIS_SECTIONS } from "@/lib/data/hypnosis";
 import { selectHypnosisSections } from "@/lib/data/selectHypnosisSections";
 import { checkSafetyViolation } from "@/lib/safety/rules";
 import { SAFETY_RESPONSES } from "@/lib/safety/responses";
+import type { ObservabilityEvent } from "@/lib/observability/events";
 
 export const runtime = "edge";
+
+function logEvent(event: ObservabilityEvent) {
+  console.log("[obs]", event);
+}
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -20,6 +25,8 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  logEvent({ type: "session_start", sessionId });
+
   // 1. Gem brugerens besked
   await appendToSession(sessionId, {
     role: "user",
@@ -27,48 +34,76 @@ export async function POST(req: NextRequest) {
     timestamp: Date.now(),
   });
 
-  // 2. Sikkerhedscheck (før AI-kald)
+  logEvent({
+    type: "user_message",
+    sessionId,
+    messageLength: message.length,
+  });
+
+  // 2. Sikkerhedscheck
   const violation = checkSafetyViolation(message);
 
   if (violation) {
+    logEvent({
+      type: "safety_violation",
+      sessionId,
+      violationType: violation,
+    });
+
     const reply = SAFETY_RESPONSES[violation];
 
-    // Gem afvisning som assistant-svar
     await appendToSession(sessionId, {
       role: "assistant",
       content: reply,
       timestamp: Date.now(),
     });
 
+    logEvent({
+      type: "assistant_response",
+      sessionId,
+      responseLength: reply.length,
+    });
+
     return NextResponse.json({ reply });
   }
 
-  // 3. Hent session (til kontekst)
+  // 3. Hent session
   const session = await getSession(sessionId);
 
-  // 4. RAG-light: vælg relevant domæneviden
+  // 4. RAG-light udvælgelse
   const selectedSections = selectHypnosisSections(
     HYPNOSIS_SECTIONS,
     message
   );
 
-  // 5. Sammensæt prompt
+  logEvent({
+    type: "rag_selection",
+    sessionId,
+    sectionIds: selectedSections.map((s) => s.id),
+  });
+
+  // 5. Prompt
   const prompt = [
     basePrompt(session, selectedSections),
     `Brugerens besked:\n${message}`,
   ].join("\n\n");
 
-  // 6. Kald AI-model via adapter
+  // 6. AI-kald
   const result = await generateText({ prompt });
 
-  // 7. Gem assistant-svar
   await appendToSession(sessionId, {
     role: "assistant",
     content: result.text,
     timestamp: Date.now(),
   });
 
-  // 8. Returner svar
+  logEvent({
+    type: "assistant_response",
+    sessionId,
+    responseLength: result.text.length,
+  });
+
+  // 7. Returner svar
   return NextResponse.json({
     reply: result.text,
   });

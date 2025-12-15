@@ -143,6 +143,33 @@ Hvert fravalg reducerer støj og styrker læringsfokus.
 
 ---
 
+### 12. Stram adfærdsstyring for statisk data (anti-hallucination)
+
+**Beslutning:**  
+Statisk information (fx kontaktoplysninger og praktiske fakta fra gaarsdal.net)
+må kun gengives, når brugeren stiller et direkte og eksplicit
+informationsspørgsmål om disse oplysninger.
+
+Formuleringer, der udtrykker intention eller ønske
+(fx “jeg vil gerne kontakte …”),
+må ikke udløse gengivelse af statisk data.
+
+Når statisk data gengives, skal det ske ordret og uændret,
+præcis som leveret i den statiske kilde.
+Modellen må ikke udfylde, normalisere, omskrive eller supplere oplysninger.
+
+Hvis den relevante information ikke findes i den statiske data,
+skal modellen tydeligt oplyse dette og afslutte svaret uden at foreslå
+handlinger eller næste skridt.
+
+**Begrundelse:**  
+Denne beslutning reducerer risiko for hallucinationer,
+utilsigtet rådgivning og tillidsbrud.
+Den gør systemets adfærd deterministisk, testbar og egnet
+som lærings- og referencearkitektur for ansvarlig AI.
+
+---
+
 ## Fremtidige beslutninger (placeholder)
 
 Nye beslutninger logges her, fx:

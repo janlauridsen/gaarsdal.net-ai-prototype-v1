@@ -12,6 +12,24 @@ Beslutninger ændres kun ved eksplicit valg.
 
 ---
 
+## Arkitektonisk mantra
+
+> **Hellere stoppe rigtigt  
+> end hjælpe forkert.**
+
+Dette mantra fungerer som fortolkningsprincip for alle arkitektoniske beslutninger
+i `gaarsdal-layered-prototype-v1`.
+
+Hvis der opstår tvivl om:
+- hvor meget systemet må gøre
+- om et flow er for hjælpsomt
+- om en grænse bør udvides
+
+skal dette mantra vægtes højere end funktionel bekvemmelighed
+eller oplevet brugerhjælp.
+
+---
+
 ## 2025-01 – Projektets grundlag
 
 ### 1. Prototype frem for produkt

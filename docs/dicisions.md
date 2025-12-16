@@ -30,6 +30,11 @@ eller oplevet brugerhjælp.
 
 Arkitekturen er designet til lokal, relationel brug, hvor tillid og korrekt afgrænsning vægtes højere end tilgængelighed og dialog.
 
+SEO bestemmer hvem der kommer.
+Arkitekturen bestemmer hvem der bliver.
+
+Arkitekturen er designet til lokal, ikke-skalerende brug, hvor korrekt afgrænsning og tillid vægtes højere end interaktion og fastholdelse.
+
 ---
 
 ## 2025-01 – Projektets grundlag

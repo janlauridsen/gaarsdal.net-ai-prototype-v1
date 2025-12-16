@@ -28,6 +28,8 @@ Hvis der opstår tvivl om:
 skal dette mantra vægtes højere end funktionel bekvemmelighed
 eller oplevet brugerhjælp.
 
+Arkitekturen er designet til lokal, relationel brug, hvor tillid og korrekt afgrænsning vægtes højere end tilgængelighed og dialog.
+
 ---
 
 ## 2025-01 – Projektets grundlag
